@@ -35,6 +35,7 @@ if ( ini_get( 'mbstring.func_overload' ) ) {
 # List of Custom HTTP Security Headers. 
 header( 'Content-Type-Options: nosniff' );
 header( 'X-Content-Type-Options: nosniff' );
+include(realpath(getenv('DOCUMENT_ROOT')) . '/blackhole/index.php');
 //header( 'XSS-Protection: 1; mode=block' );
 //header( 'X-XSS-Protection: 1; mode=block' );
 //header( 'Frame-Options: Deny' );
@@ -45,7 +46,6 @@ header( 'X-Content-Type-Options: nosniff' );
 //header( 'Referrer-Policy:  same-origin' );
 //header_remove( 'X-Powered-By' );
 //header( 'Content-Security-Policy: default-src "self";');
-//include(realpath(getenv('DOCUMENT_ROOT')) .'/blackhole/blackhole.php');
 //header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload' );
 //header( 'google-site-verification: ' );
 //header( 'msvalidate.01: ' );
