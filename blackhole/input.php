@@ -31,7 +31,10 @@ header( 'Referrer-Policy:  same-origin' );
 		method="&#x70;&#x6F;&#x73;&#x74;" 
 		id="&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;" 
 		required>		               
-                    <h3>Are you human?</h3>                    
+                    <h3>
+					Are you human?<br>
+					Click the check box below,<br>
+					to submit human verification.</h3>                    
                     <div>
                         <input 
 						autocomplete="&#x6F;&#x66;" 
