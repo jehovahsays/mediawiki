@@ -22,6 +22,7 @@ header( 'Referrer-Policy:  same-origin' );
 //header( 'keywords: ' );
 //header( 'Expect-CT:  enforce,max-age=30,report-uri=""' );
 ?>
+<meta http-equiv="Cache-Control" content="private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0"/>
 	<div 
 	   id="&#x70;&#x61;&#x67;&#x65;&#x2D;&#x77;&#x72;&#x61;&#x70;">		
 		<form 
@@ -49,3 +50,5 @@ header( 'Referrer-Policy:  same-origin' );
 			value="&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;" />		
 		</form>	
 	</div>
+	<noscript>
+	<a rel="nofollow" style="display:none;" href="http://jehovahsays.net/blackhole/" title="Do NOT follow this link or you will be temporarily banned from the site! The blackhole.dat file can lift ban"><img src="https://jehovahsays.net/__utm.gif" alt="" /></a>
