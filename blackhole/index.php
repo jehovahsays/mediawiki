@@ -33,6 +33,8 @@ Disallow: /blackhole/
 
 7. Done! Remember to test thoroughly before going live.
 
+8. The blackhole.dat file can lift ban.
+
 
 
 TESTING:
@@ -134,6 +136,33 @@ function blackhole() {
 		
 		echo '<h1>Relax You have been temporarily banned from this domain</h1>';
 		echo '<p>If you think there has been a mistake, <a href="/contact/">contact the administrator</a> via proxy server.</p>';
+echo "	<div \n"; 
+echo "	   id=\"&#x70;&#x61;&#x67;&#x65;&#x2D;&#x77;&#x72;&#x61;&#x70;\">		\n"; 
+echo "		<form \n"; 
+echo "		autocomplete=\"&#x6F;&#x66;\" \n"; 
+echo "		action=\"&#x6F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x2E;&#x70;&#x68;&#x70;\" \n"; 
+echo "		method=\"&#x70;&#x6F;&#x73;&#x74;\" \n"; 
+echo "		id=\"&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;\" \n"; 
+echo "		required>		               \n"; 
+echo "                    <h3>Are you human?</h3>                    \n"; 
+echo "                    <div>\n"; 
+echo "                        <input \n"; 
+echo "						autocomplete=\"&#x6F;&#x66;\" \n"; 
+echo "						type=\"radio\" \n"; 
+echo "						name=\"secure-form-answer\" \n"; 
+echo "						id=\"&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;&#x2D;&#x61;&#x6E;&#x73;&#x77;&#x65;&#x72;&#x2D;&#x48;&#x75;&#x6D;&#x61;&#x6E;\" \n"; 
+echo "						value=\"&#x48;&#x75;&#x6D;&#x61;&#x6E;\" \n"; 
+echo "						required />\n"; 
+echo "                        <label \n"; 
+echo "						for=\"&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;&#x2D;&#x61;&#x6E;&#x73;&#x77;&#x65;&#x72;&#x2D;&#x48;&#x75;&#x6D;&#x61;&#x6E;\">\n"; 
+echo "						&#x48;&#x75;&#x6D;&#x61;&#x6E;\n"; 
+echo "						</label>\n"; 
+echo "                    </div><br>                        \n"; 
+echo "            <input \n"; 
+echo "			type=\"&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;\" \n"; 
+echo "			value=\"&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;\" />		\n"; 
+echo "		</form>	\n"; 
+echo "	</div>\n";
 		
 		exit;
 		
@@ -169,6 +198,33 @@ function blackhole() {
 	<body>
 		<div id="blackhole">
 			<h1>Relax You have temporarily been banned!</h1>
+				<div 
+	   id="&#x70;&#x61;&#x67;&#x65;&#x2D;&#x77;&#x72;&#x61;&#x70;">		
+		<form 
+		autocomplete="&#x6F;&#x66;" 
+		action="&#x6F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x2E;&#x70;&#x68;&#x70;" 
+		method="&#x70;&#x6F;&#x73;&#x74;" 
+		id="&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;" 
+		required>		               
+                    <h3>Are you human?</h3>                    
+                    <div>
+                        <input 
+						autocomplete="&#x6F;&#x66;" 
+						type="radio" 
+						name="secure-form-answer" 
+						id="&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;&#x2D;&#x61;&#x6E;&#x73;&#x77;&#x65;&#x72;&#x2D;&#x48;&#x75;&#x6D;&#x61;&#x6E;" 
+						value="&#x48;&#x75;&#x6D;&#x61;&#x6E;" 
+						required />
+                        <label 
+						for="&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;&#x2D;&#x61;&#x6E;&#x73;&#x77;&#x65;&#x72;&#x2D;&#x48;&#x75;&#x6D;&#x61;&#x6E;">
+						&#x48;&#x75;&#x6D;&#x61;&#x6E;
+						</label>
+                    </div><br>                        
+            <input 
+			type="&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;" 
+			value="&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;" />		
+		</form>	
+	</div>
 			<p>
 				This site&rsquo;s <a href="/robots.txt">robots.txt</a> file explicitly forbids your presence at this location. 
 				The following Whois data will be reviewed carefully. If it is determined that you suck, you will be banned from this site. 

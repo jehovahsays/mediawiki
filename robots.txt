@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /extensions/WikiBanHammer/blackhole/
+Disallow: /blackhole/
