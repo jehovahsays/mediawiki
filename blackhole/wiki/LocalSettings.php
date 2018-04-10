@@ -30,7 +30,7 @@ $wgScriptPath = "/blackhole/wiki";
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServerName = 'jehovahsays.net';
-$wgServer = "http://jehovahsays.net";
+$wgServer = "http://127.0.0.1";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -43,8 +43,8 @@ $wgLogo = "$wgResourceBasePath/resources/assets/mediawiki.png";
 $wgEnableEmail = false;
 $wgEnableUserEmail = false; # UPO
 
-$wgEmergencyContact = "authority@jehovahsays.net";
-$wgPasswordSender = "authority@jehovahsays.net";
+$wgEmergencyContact = "";
+$wgPasswordSender = "";
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
@@ -52,10 +52,10 @@ $wgEmailAuthentication = false;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = "jehovahsays.net";
-$wgDBname = "BigData";
-$wgDBuser = "authority";
-$wgDBpassword = "@Jehovahgod1";
+$wgDBserver = "";
+$wgDBname = "";
+$wgDBuser = "";
+$wgDBpassword = "";
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -97,14 +97,14 @@ $wgShellLocale = "C.UTF-8";
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "en";
 
-$wgSecretKey = "69e533bf336a745a8c3b4c6c786d1aa7726e834360894377592d77aeddd4e840";
+$wgSecretKey = "";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "6a37b2860fc5710c";
+$wgUpgradeKey = "";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
