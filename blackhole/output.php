@@ -22,6 +22,7 @@ header( 'Referrer-Policy:  same-origin' );
 //header( 'keywords: ' );
 //header( 'Expect-CT:  enforce,max-age=30,report-uri=""' );
 ?>
+<meta name="viewport" content="width=device-width">
 <meta http-equiv="Cache-Control" content="private, no-cache, no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0"/>
 	<div id="&#x70;&#x61;&#x67;&#x65;&#x2D;&#x77;&#x72;&#x61;&#x70;">
 		<h1>&#x46;&#x6F;&#x72;&#x6D;&#x20;&#x52;&#x65;&#x73;&#x75;&#x6C;&#x74;&#x73;</h1>		
@@ -31,7 +32,6 @@ header( 'Referrer-Policy:  same-origin' );
             if ($answer1 == "Human") { $totalCorrect++; }            
             echo "<div id='&#x72;&#x65;&#x73;&#x75;&#x6C;&#x74;&#x73;'>$totalCorrect / &#x31;&#x20;&#x63;&#x6F;&#x72;&#x72;&#x65;&#x63;&#x74;</div>";           
         ?><br>
-	<a href="http://jehovahsays.net/index.php?title=Special:SpecialPages">&#x45;&#x6E;&#x74;&#x65;&#x72;</a>
+	<a href="http://jehovahsays.net/index.php?title=Special:SpecialPages">&#x45;&#x6E;&#x74;&#x65;&#x72; this website</a>
 	</div>
-	<noscript>
 	<a rel="nofollow" style="display:none;" href="http://jehovahsays.net/blackhole/" title="Do NOT follow this link or you will be temporarily banned from the site! The blackhole.dat file can lift ban"><img src="https://jehovahsays.net/__utm.gif" alt="" /></a>

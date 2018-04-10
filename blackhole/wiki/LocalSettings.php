@@ -29,15 +29,15 @@ $wgMetaNamespace = "Project";
 $wgScriptPath = "/blackhole/wiki";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServerName = '127.0.0.1';
-$wgServer = "http://127.0.0.1";
+$wgServerName = 'jehovahsays.net';
+$wgServer = "http://jehovahsays.net";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
 
 ## The URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = "$wgResourceBasePath/resources/assets/wiki.png";
+$wgLogo = "$wgResourceBasePath/resources/assets/mediawiki.png";
 
 ## UPO means: this is also a user preference option
 $wgEnableEmail = false;
@@ -149,7 +149,7 @@ $wgUseCopyrightUpload = true;
 $wgGroupPermissions['*']['read'] = true;
 $wgGroupPermissions['*']['createaccount'] = true;
 $wgGroupPermissions['*']['view'] = true;
-$wgGroupPermissions['*']['edit'] = true;
+$wgGroupPermissions['*']['edit'] = false;
 
 # for users
 $wgGroupPermissions['user']['read'] = true;
@@ -169,7 +169,25 @@ $wgDefaultSkin = "vector";
 # wfLoadExtensions('ExtensionName');
 # to LocalSettings.php. Check specific extension documentation for more details.
 # The following extensions were automatically enabled
-
+wfLoadExtension( 'Cite' );
+wfLoadExtension( 'CiteThisPage' );
+wfLoadExtension( 'ConfirmEdit' );
+wfLoadExtension( 'Gadgets' );
+wfLoadExtension( 'ImageMap' );
+wfLoadExtension( 'InputBox' );
+wfLoadExtension( 'Interwiki' );
+wfLoadExtension( 'LocalisationUpdate' );
+wfLoadExtension( 'Nuke' );
+wfLoadExtension( 'ParserFunctions' );
+wfLoadExtension( 'PdfHandler' );
+wfLoadExtension( 'Poem' );
+wfLoadExtension( 'Renameuser' );
+wfLoadExtension( 'SpamBlacklist' );
+wfLoadExtension( 'SyntaxHighlight_GeSHi' );
+wfLoadExtension( 'TitleBlacklist' );
+wfLoadExtension( 'WikiEditor' );
+$wgHiddenPrefs[] = 'usebetatoolbar';
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
 require_once "$IP/extensions/Jehovahsays/Jehovahsays.php";
 $wgSecurity = '
 <style>
@@ -186,21 +204,10 @@ p.hidden {border-style: hidden;}
 p.mix {border-style: dotted dashed solid double;}
 </style>
 <meta name="viewport" content="width=device-width">
-Website in Programming Developement mode. 
-Please turn off Javascipt in your browser to unlock this website.<br> 
-Remember to turn on Javascript to lock this website.<br>
-Thank you.<br>
-Jehovahsays LLC<br>
-<a href="https://github.com/jehovahsays/mediawiki">Edit the programming language for this website on Github</a>
-<form autocomplete="off">
-<fieldset disabled>
 ';
 
 # You can add <noscript> within $wgBottomSecurity = ''; to lockdown wiki
 $wgBottomSecurity = '
-</fieldset>
-</form>
-<noscript>
 <a rel="nofollow" style="display:none;" href="/blackhole/" title="Do NOT follow this link or you will be temporarily banned from the site! The blackhole.dat file can lift ban"><img src="/blackhole/__utm.gif" alt="" /></a>
 ';
 

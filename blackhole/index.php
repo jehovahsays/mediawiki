@@ -140,7 +140,7 @@ echo "	<div \n";
 echo "	   id=\"&#x70;&#x61;&#x67;&#x65;&#x2D;&#x77;&#x72;&#x61;&#x70;\">		\n"; 
 echo "		<form \n"; 
 echo "		autocomplete=\"&#x6F;&#x66;\" \n"; 
-echo "		action=\"&#x6F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x2E;&#x70;&#x68;&#x70;\" \n"; 
+echo "      action=\"&#x2F;&#x62;&#x6C;&#x61;&#x63;&#x6B;&#x68;&#x6F;&#x6C;&#x65;&#x2F;&#x6F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x2E;&#x70;&#x68;&#x70;\" \n";
 echo "		method=\"&#x70;&#x6F;&#x73;&#x74;\" \n"; 
 echo "		id=\"&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;\" \n"; 
 echo "		required>		               \n"; 
@@ -202,7 +202,7 @@ echo "	</div>\n";
 	   id="&#x70;&#x61;&#x67;&#x65;&#x2D;&#x77;&#x72;&#x61;&#x70;">		
 		<form 
 		autocomplete="&#x6F;&#x66;" 
-		action="&#x6F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x2E;&#x70;&#x68;&#x70;" 
+		action="&#x2F;&#x62;&#x6C;&#x61;&#x63;&#x6B;&#x68;&#x6F;&#x6C;&#x65;&#x2F;&#x6F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x2E;&#x70;&#x68;&#x70;" 
 		method="&#x70;&#x6F;&#x73;&#x74;" 
 		id="&#x73;&#x65;&#x63;&#x75;&#x72;&#x65;&#x2D;&#x66;&#x6F;&#x72;&#x6D;" 
 		required>		               

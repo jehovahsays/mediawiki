@@ -77,4 +77,5 @@ Thumbs.db
 /.htaccess
 /.htpasswd
 /tests/phan/issues
+/blackhole/wiki/
 *.rej
