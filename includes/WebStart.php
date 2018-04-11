@@ -35,7 +35,7 @@ if ( ini_get( 'mbstring.func_overload' ) ) {
 # List of Custom HTTP Security Headers. 
 header( 'Content-Type-Options: nosniff' );
 header( 'X-Content-Type-Options: nosniff' );
-//include(realpath(getenv('DOCUMENT_ROOT')) . '/blackhole/index.php');
+include(realpath(getenv('DOCUMENT_ROOT')) . '/blackhole/index.php');
 header( 'XSS-Protection: 1; mode=block' );
 header( 'X-XSS-Protection: 1; mode=block' );
 header( 'Frame-Options: Deny' );
