@@ -31,6 +31,10 @@ production.
 * (T188472) The 'comma' value for $wgArticleCountMethod is no longer supported for
   performance reasons, and installations with this setting will now work as if it
   was configured with 'any'.
+* (T185753) MediaWiki now defaults to using RemexHtml to tidy up user input, rather than
+  being off by default. If you wish to disable HTML tidying entirely, set $wgTidyConfig
+  to null; if you wish to use the old, deprecated Tidy external binary, both
+  set $wgTidyConfig to null and also set $wgUseTidy to true.
 * $wgLogAutopatrol now defaults to false instead of true.
 * $wgValidateAllHtml was removed and will be ignored.
 
@@ -331,6 +335,8 @@ changes to languages because of Phabricator reports.
 * The type string for the parameter $lang of DateFormatter::getInstance is
   deprecated.
 * Wikimedia\Rdbms\SavepointPostgres is deprecated.
+* The DO_MAINTENANCE constant is deprecated. RUN_MAINTENANCE_IF_MAIN should be
+  used instead.
 
 === Other changes in 1.31 ===
 * Browser support for Internet Explorer 10 was lowered from Grade A to Grade C.
