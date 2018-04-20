@@ -25,10 +25,6 @@
  * @file
  */
 
-if ( ini_get( 'mbstring.func_overload' ) ) {
-	die( 'MediaWiki does not support installations where mbstring.func_overload is non-zero.' );
-}
-
 # T17461: Make IE8 turn off content sniffing. Everybody else should ignore this
 # We're adding it here so that it's *always* set, even for alternate entry
 # points and when $wgOut gets disabled or overridden.
@@ -55,15 +51,6 @@ header_remove( 'X-Powered-By' );
 //header( 'description: ' );
 //header( 'keywords: ' );
 //header( 'Expect-CT:  enforce,max-age=30,report-uri=""' );
-
-/**
- * @var float Request start time as fractional seconds since epoch
- * @deprecated since 1.25; use $_SERVER['REQUEST_TIME_FLOAT'] or
- *   WebRequest::getElapsedTime() instead.
- */
-$wgRequestTime = $_SERVER['REQUEST_TIME_FLOAT'];
-
-unset( $IP );
 
 # Valid web server entry point, enable includes.
 # Please don't move this line to includes/Defines.php. This line essentially

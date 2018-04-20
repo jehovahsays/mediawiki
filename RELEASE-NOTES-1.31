@@ -37,6 +37,12 @@ production.
   set $wgTidyConfig to null and also set $wgUseTidy to true.
 * $wgLogAutopatrol now defaults to false instead of true.
 * $wgValidateAllHtml was removed and will be ignored.
+* $wgScriptExtension was removed (deprecated and ignored since 1.25).
+  See 1.25 release notes for more information.
+* $wgUseAjax is now marked as deprecated, just like the deprecated AJAX
+  framework that it enables. Some extensions mistakenly used this to check
+  whether any AJAX functionality at all should be enabled, further making this
+  problematic to retain.
 
 === New features in 1.31 ===
 * (T76554) User sub-pages named ….json are now protected in the same way that ….js
@@ -84,6 +90,12 @@ production.
   extensions. Pass --with-extensions to enable that feature.
 * (T184791) rc_patrolled now has three states: "0" for unpatrolled,
   "1" for manually patrolled and "2" for autopatrolled actions.
+* Extensions can now set their type to "editor" if they provide an editor
+  or enhance the editing experience.
+* Extensions can use a PSR-4 autoloader by setting an "AutoloadNamespaces" property
+  in extension.json. See
+  <https://www.mediawiki.org/wiki/Manual:Extension.json/Schema#AutoloadNamespaces>
+  for more details and an example.
 
 === External library changes in 1.31 ===
 
@@ -98,7 +110,7 @@ production.
 * Updated wikimedia/running-stat from 1.1.0 to 1.2.0.
 * Updated wikimedia/wrappedstring from 2.2.0 to 2.3.0.
 * Updated mediawiki/at-ease from 1.1.0 to 1.2.0.
-* Updated wikimedia/php-session-serializer from 1.0.4 to 1.0.5.
+* Updated wikimedia/php-session-serializer from 1.0.4 to 1.0.6.
 * Updated wikimedia/remex-html from 1.0.2 to 1.0.3.
 * …
 
@@ -115,6 +127,7 @@ production.
   'mediawiki.viewport' module instead.
 * The deprecated 'mediawiki.widgets.CategorySelector' module alias was removed.
   Use the 'mediawiki.widgets.CategoryMultiselectWidget' module directly instead.
+* mediawiki/at-ease was replaced with wikimedia/at-ease.
 
 === Bug fixes in 1.31 ===
 * (T90902) Non-breaking space in header ID breaks anchor
@@ -123,6 +136,9 @@ production.
 * (T185058) The 'name' value to tgprop for action=query&list=tags has been
   removed. It has never made a difference in the output, the name was always
   returned regardless.
+* The 'watch' and 'unwatch' parameters for action=move have been removed.  They
+  were deprecated and also accidentally nonfunctional since 1.17 in 2010.  Use
+  'watchlist' instead.
 
 === Action API internal changes in 1.31 ===
 * ApiBase::getProfileDBTime was removed (deprecated since 1.25)
@@ -249,6 +265,10 @@ changes to languages because of Phabricator reports.
   MWTidy::checkErrors() and its callee TidyDriverBase::validate() are removed, as are
   MediaWikiTestCase::assertValidHtmlSnippet() and ::assertValidHtmlDocument(). The
   $wgValidateAllHtml configuration option is removed and will be ignored.
+* Execution of external programs using MediaWiki\Shell\Command now applies RESTRICT_DEFAULT
+  Firejail restriction by default.
+* The ResourceLoaderModule::getHashMtime() and ::getDefinitionMtime() methods,
+  deprecated in 1.26, were removed.
 
 === Deprecations in 1.31 ===
 * The Revision class was deprecated in favor of RevisionStore, BlobStore, and
@@ -337,6 +357,8 @@ changes to languages because of Phabricator reports.
 * Wikimedia\Rdbms\SavepointPostgres is deprecated.
 * The DO_MAINTENANCE constant is deprecated. RUN_MAINTENANCE_IF_MAIN should be
   used instead.
+* The function wfShellWikiCmd() has been deprecated, use
+  MediaWiki\Shell::makeScriptCommand().
 
 === Other changes in 1.31 ===
 * Browser support for Internet Explorer 10 was lowered from Grade A to Grade C.
@@ -360,7 +382,7 @@ Oracle and Microsoft SQL Server.
 
 The supported versions are:
 
-* MySQL 5.0.3 or later
+* MySQL 5.5.8 or later
 * PostgreSQL 9.2 or later
 * SQLite 3.3.7 or later
 * Oracle 9.0.1 or later

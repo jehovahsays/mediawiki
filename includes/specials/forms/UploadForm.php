@@ -406,14 +406,11 @@ class UploadForm extends HTMLForm {
 	protected function addUploadJS() {
 		$config = $this->getConfig();
 
-		$useAjaxDestCheck = $config->get( 'UseAjax' ) && $config->get( 'AjaxUploadDestCheck' );
-		$useAjaxLicensePreview = $config->get( 'UseAjax' ) &&
-			$config->get( 'AjaxLicensePreview' ) && $config->get( 'EnableAPI' );
 		$this->mMaxUploadSize['*'] = UploadBase::getMaxUploadSize();
 
 		$scriptVars = [
-			'wgAjaxUploadDestCheck' => $useAjaxDestCheck,
-			'wgAjaxLicensePreview' => $useAjaxLicensePreview,
+			'wgAjaxUploadDestCheck' => $config->get( 'AjaxUploadDestCheck' ),
+			'wgAjaxLicensePreview' => $config->get( 'AjaxLicensePreview' ),
 			'wgUploadAutoFill' => !$this->mForReUpload &&
 				// If we received mDestFile from the request, don't autofill
 				// the wpDestFile textbox

@@ -577,7 +577,16 @@ class Article implements Page {
 					# Preload timestamp to avoid a DB hit
 					$outputPage->setRevisionTimestamp( $this->mPage->getTimestamp() );
 
-					if ( !Hooks::run( 'ArticleContentViewCustom',
+					# Pages containing custom CSS or JavaScript get special treatment
+					if ( $this->getTitle()->isSiteConfigPage() || $this->getTitle()->isUserConfigPage() ) {
+						$dir = $this->getContext()->getLanguage()->getDir();
+						$lang = $this->getContext()->getLanguage()->getHtmlCode();
+
+						$outputPage->wrapWikiMsg(
+							"<div id='mw-clearyourcache' lang='$lang' dir='$dir' class='mw-content-$dir'>\n$1\n</div>",
+							'clearyourcache'
+						);
+					} elseif ( !Hooks::run( 'ArticleContentViewCustom',
 						[ $this->fetchContentObject(), $this->getTitle(), $outputPage ] )
 					) {
 						# Allow extensions do their own custom view for certain pages
@@ -965,7 +974,7 @@ class Article implements Page {
 	 * @return bool
 	 */
 	public function showPatrolFooter() {
-		global $wgUseNPPatrol, $wgUseRCPatrol, $wgUseFilePatrol, $wgEnableAPI, $wgEnableWriteAPI;
+		global $wgUseNPPatrol, $wgUseRCPatrol, $wgUseFilePatrol;
 
 		$outputPage = $this->getContext()->getOutput();
 		$user = $this->getContext()->getUser();
@@ -1056,8 +1065,7 @@ class Article implements Page {
 						'rc_namespace' => NS_FILE,
 						'rc_cur_id' => $title->getArticleID()
 					],
-					__METHOD__,
-					[ 'USE INDEX' => 'rc_timestamp' ]
+					__METHOD__
 				);
 				if ( $rc ) {
 					// Use patrol message specific to files
@@ -1100,7 +1108,7 @@ class Article implements Page {
 		}
 
 		$outputPage->preventClickjacking();
-		if ( $wgEnableAPI && $wgEnableWriteAPI && $user->isAllowed( 'writeapi' ) ) {
+		if ( $user->isAllowed( 'writeapi' ) ) {
 			$outputPage->addModules( 'mediawiki.page.patrol.ajax' );
 		}
 

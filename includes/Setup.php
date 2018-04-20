@@ -37,10 +37,9 @@ if ( !defined( 'MEDIAWIKI' ) ) {
  * Pre-config setup: Before loading LocalSettings.php
  */
 
-// Get profiler configuraton
-$wgProfiler = [];
-if ( file_exists( "$IP/StartProfiler.php" ) ) {
-	require "$IP/StartProfiler.php";
+// Sanity check (T5782, T122807)
+if ( ini_get( 'mbstring.func_overload' ) ) {
+	die( 'MediaWiki does not support installations where mbstring.func_overload is non-zero.' );
 }
 
 // Start the autoloader, so that extensions can derive classes from core files
@@ -84,6 +83,11 @@ MediaWiki\HeaderCallback::register();
 /**
  * Load LocalSettings.php
  */
+
+if ( is_readable( "$IP/StartProfiler.php" ) ) {
+	// @deprecated since 1.32: Use LocalSettings.php instead.
+	require "$IP/StartProfiler.php";
+}
 
 if ( defined( 'MW_CONFIG_CALLBACK' ) ) {
 	call_user_func( MW_CONFIG_CALLBACK );
@@ -280,7 +284,6 @@ if ( !$wgLocalFileRepo ) {
 		'name' => 'local',
 		'directory' => $wgUploadDirectory,
 		'scriptDirUrl' => $wgScriptPath,
-		'scriptExtension' => '.php',
 		'url' => $wgUploadBaseUrl ? $wgUploadBaseUrl . $wgUploadPath : $wgUploadPath,
 		'hashLevels' => $wgHashedUploadDirectory ? 2 : 0,
 		'thumbScriptUrl' => $wgThumbnailScriptPath,

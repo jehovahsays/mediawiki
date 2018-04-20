@@ -2270,18 +2270,6 @@ function wfEscapeShellArg( /*...*/ ) {
 }
 
 /**
- * Check if wfShellExec() is effectively disabled via php.ini config
- *
- * @return bool|string False or 'disabled'
- * @since 1.22
- * @deprecated since 1.30 use MediaWiki\Shell::isDisabled()
- */
-function wfShellExecDisabled() {
-	wfDeprecated( __FUNCTION__, '1.30' );
-	return Shell::isDisabled() ? 'disabled' : false;
-}
-
-/**
  * Execute a shell command, with time and memory limits mirrored from the PHP
  * configuration if supported.
  *
@@ -2327,6 +2315,8 @@ function wfShellExec( $cmd, &$retval = null, $environ = [],
 			->limits( $limits )
 			->includeStderr( $includeStderr )
 			->profileMethod( $profileMethod )
+			// For b/c
+			->restrict( Shell::RESTRICT_NONE )
 			->execute();
 	} catch ( ProcOpenError $ex ) {
 		$retval = -1;
@@ -2361,21 +2351,11 @@ function wfShellExecWithStderr( $cmd, &$retval = null, $environ = [], $limits = 
 }
 
 /**
- * Formerly set the locale for locale-sensitive operations
- *
- * This is now done in Setup.php.
- *
- * @deprecated since 1.30, no longer needed
- * @see $wgShellLocale
- */
-function wfInitShellLocale() {
-	wfDeprecated( __FUNCTION__, '1.30' );
-}
-
-/**
  * Generate a shell-escaped command line string to run a MediaWiki cli script.
  * Note that $parameters should be a flat array and an option with an argument
  * should consist of two consecutive items in the array (do not use "--option value").
+ *
+ * @deprecated since 1.31, use Shell::makeScriptCommand()
  *
  * @param string $script MediaWiki cli script path
  * @param array $parameters Arguments and options to the script

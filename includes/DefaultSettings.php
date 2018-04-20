@@ -71,7 +71,7 @@ $wgConfigRegistry = [
  * MediaWiki version number
  * @since 1.2
  */
-$wgVersion = '1.31.0-alpha';
+$wgVersion = '1.32.0-alpha';
 
 /**
  * Name of the site. It must be changed in LocalSettings.php
@@ -156,19 +156,6 @@ $wgScriptPath = '/wiki';
 $wgUsePathInfo = ( strpos( PHP_SAPI, 'cgi' ) === false ) &&
 	( strpos( PHP_SAPI, 'apache2filter' ) === false ) &&
 	( strpos( PHP_SAPI, 'isapi' ) === false );
-
-/**
- * The extension to append to script names by default.
- *
- * Some hosting providers used PHP 4 for *.php files, and PHP 5 for *.php5.
- * This variable was provided to support those providers.
- *
- * @since 1.11
- * @deprecated since 1.25; support for '.php5' has been phased out of MediaWiki
- *  proper. Backward-compatibility can be maintained by configuring your web
- *  server to rewrite URLs. See RELEASE-NOTES for details.
- */
-$wgScriptExtension = '.php';
 
 /**@}*/
 
@@ -503,9 +490,6 @@ $wgImgAuthUrlPathMap = [];
  *   - descBaseUrl       URL of image description pages, e.g. https://en.wikipedia.org/wiki/File:
  *   - scriptDirUrl      URL of the MediaWiki installation, equivalent to $wgScriptPath, e.g.
  *                       https://en.wikipedia.org/w
- *   - scriptExtension   Script extension of the MediaWiki installation, equivalent to
- *                       $wgScriptExtension, e.g. ".php5". Defaults to ".php".
- *
  *   - articleUrl        Equivalent to $wgArticlePath, e.g. https://en.wikipedia.org/wiki/$1
  *   - fetchDescription  Fetch the text of the remote file description page. Equivalent to
  *                       $wgFetchCommonsDescriptions.
@@ -1100,6 +1084,15 @@ $wgJpegTran = '/usr/bin/jpegtran';
  * @since 1.27
  */
 $wgJpegPixelFormat = 'yuv420';
+
+/**
+ * When scaling a JPEG thumbnail, this is the quality we request
+ * from the backend. It should be an int between 1 and 100,
+ * with 100 indicating 100% quality.
+ *
+ * @since 1.32
+ */
+$wgJpegQuality = 80;
 
 /**
  * Some tests and extensions use exiv2 to manipulate the Exif metadata in some
@@ -3259,11 +3252,6 @@ $wgXhtmlNamespaces = [];
  * MediaWiki:Anonnotice page.
  */
 $wgSiteNotice = '';
-
-/**
- * If this is set, a "donate" link will appear in the sidebar. Set it to a URL.
- */
-$wgSiteSupportPage = '';
 
 /**
  * Default skin, for new users and anonymous visitors. Registered users may
@@ -6061,7 +6049,7 @@ $wgUseTeX = false;
 /************************************************************************//**
  * @name   Profiling, testing and debugging
  *
- * To enable profiling, edit StartProfiler.php
+ * See $wgProfiler for how to enable profiling.
  *
  * @{
  */
@@ -6305,6 +6293,66 @@ $wgDevelopmentWarnings = false;
  * after the limit.
  */
 $wgDeprecationReleaseLimit = false;
+
+/**
+ * Profiler configuration.
+ *
+ * To use a profiler, set $wgProfiler in LocalSetings.php.
+ * For backwards-compatibility, it is also allowed to set the variable from
+ * a separate file called StartProfiler.php, which MediaWiki will include.
+ *
+ * Example:
+ *
+ * @code
+ *  $wgProfiler['class'] = ProfilerXhprof::class;
+ * @endcode
+ *
+ * For output, set the 'output' key to an array of class names, one for each
+ * output type you want the profiler to generate. For example:
+ *
+ * @code
+ *  $wgProfiler['output'] = [ ProfilerOutputText::class ];
+ * @endcode
+ *
+ * The output classes available to you by default are ProfilerOutputDb,
+ * ProfilerOutputDump, ProfilerOutputStats, ProfilerOutputText, and
+ * ProfilerOutputUdp.
+ *
+ * ProfilerOutputStats outputs profiling data as StatsD metrics. It expects
+ * that you have set the $wgStatsdServer configuration variable to the host (or
+ * host:port) of your statsd server.
+ *
+ * ProfilerOutputText will output profiling data in the page body as a comment.
+ * You can make the profiling data in HTML render as part of the page content
+ * by setting the 'visible' configuration flag:
+ *
+ * @code
+ *  $wgProfiler['visible'] = true;
+ * @endcode
+ *
+ * 'ProfilerOutputDb' expects a database table that can be created by applying
+ * maintenance/archives/patch-profiling.sql to your database.
+ *
+ * 'ProfilerOutputDump' expects a $wgProfiler['outputDir'] telling it where to
+ * write dump files. The files produced are compatible with the XHProf gui.
+ * For a rudimentary sampling profiler:
+ *
+ * @code
+ *   $wgProfiler['class'] = 'ProfilerXhprof';
+ *   $wgProfiler['output'] = array( 'ProfilerOutputDb' );
+ *   $wgProfiler['sampling'] = 50; // one every 50 requests
+ * @endcode
+ *
+ * When using the built-in `sampling` option, the `class` will changed to
+ * ProfilerStub for non-sampled cases.
+ *
+ * For performance, the profiler is always disabled for CLI scripts as they
+ * could be long running and the data would accumulate. Use the '--profiler'
+ * parameter of maintenance scripts to override this.
+ *
+ * @since 1.17.0
+ */
+$wgProfiler = [];
 
 /**
  * Only record profiling info for pages that took longer than this
@@ -7985,25 +8033,6 @@ $wgExemptFromUserRobotsControl = null;
  */
 
 /**
- * Enable the MediaWiki API for convenient access to
- * machine-readable data via api.php
- *
- * See https://www.mediawiki.org/wiki/API
- *
- * @deprecated since 1.31
- */
-$wgEnableAPI = true;
-
-/**
- * Allow the API to be used to perform write operations
- * (page edits, rollback, etc.) when an authorised user
- * accesses it
- *
- * @deprecated since 1.31
- */
-$wgEnableWriteAPI = true;
-
-/**
  *
  *     WARNING: SECURITY THREAT - debug use only
  *
@@ -8141,6 +8170,8 @@ $wgAPIUselessQueryPages = [
 
 /**
  * Enable AJAX framework
+ *
+ * @deprecated (officially) since MediaWiki 1.31 and ignored since 1.32
  */
 $wgUseAjax = true;
 
@@ -8157,7 +8188,7 @@ $wgAjaxExportList = [];
 $wgAjaxUploadDestCheck = true;
 
 /**
- * Enable previewing licences via AJAX. Also requires $wgEnableAPI to be true.
+ * Enable previewing licences via AJAX.
  */
 $wgAjaxLicensePreview = true;
 
@@ -8251,7 +8282,7 @@ $wgMaxShellWallClockTime = 180;
 $wgShellCgroup = false;
 
 /**
- * Executable path of the PHP cli binary (php/php5). Should be set up on install.
+ * Executable path of the PHP cli binary. Should be set up on install.
  */
 $wgPhpCli = '/usr/bin/php';
 

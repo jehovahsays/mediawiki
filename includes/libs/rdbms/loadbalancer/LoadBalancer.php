@@ -369,7 +369,7 @@ class LoadBalancer implements ILoadBalancer {
 		// Scale the configured load ratios according to each server's load and state
 		$this->getLoadMonitor()->scaleLoads( $loads, $domain );
 
-		// Pick a server to use, accounting for weights, load, lag, and mWaitForPos
+		// Pick a server to use, accounting for weights, load, lag, and "waitForPos"
 		list( $i, $laggedReplicaMode ) = $this->pickReaderIndex( $loads, $domain );
 		if ( $i === false ) {
 			// Replica DB connection unsuccessful
@@ -379,7 +379,7 @@ class LoadBalancer implements ILoadBalancer {
 		if ( $this->waitForPos && $i != $this->getWriterIndex() ) {
 			// Before any data queries are run, wait for the server to catch up to the
 			// specified position. This is used to improve session consistency. Note that
-			// when LoadBalancer::waitFor() sets mWaitForPos, the waiting triggers here,
+			// when LoadBalancer::waitFor() sets "waitForPos", the waiting triggers here,
 			// so update laggedReplicaMode as needed for consistency.
 			if ( !$this->doWait( $i ) ) {
 				$laggedReplicaMode = true;
@@ -424,7 +424,7 @@ class LoadBalancer implements ILoadBalancer {
 			} else {
 				$i = false;
 				if ( $this->waitForPos && $this->waitForPos->asOfTime() ) {
-					// ChronologyProtecter sets mWaitForPos for session consistency.
+					// ChronologyProtecter sets "waitForPos" for session consistency.
 					// This triggers doWait() after connect, so it's especially good to
 					// avoid lagged servers so as to avoid excessive delay in that method.
 					$ago = microtime( true ) - $this->waitForPos->asOfTime();
@@ -566,16 +566,17 @@ class LoadBalancer implements ILoadBalancer {
 		}
 	}
 
-	/**
-	 * @param int $i
-	 * @return IDatabase|bool
-	 */
-	public function getAnyOpenConnection( $i ) {
+	public function getAnyOpenConnection( $i, $flags = 0 ) {
+		$autocommit = ( ( $flags & self::CONN_TRX_AUTOCOMMIT ) == self::CONN_TRX_AUTOCOMMIT );
 		foreach ( $this->conns as $connsByServer ) {
-			if ( !empty( $connsByServer[$i] ) ) {
-				/** @var IDatabase[] $serverConns */
-				$serverConns = $connsByServer[$i];
-				return reset( $serverConns );
+			if ( !isset( $connsByServer[$i] ) ) {
+				continue;
+			}
+
+			foreach ( $connsByServer[$i] as $conn ) {
+				if ( !$autocommit || $conn->getLBInfo( 'autoCommitOnly' ) ) {
+					return $conn;
+				}
 			}
 		}
 
@@ -590,7 +591,7 @@ class LoadBalancer implements ILoadBalancer {
 	 * @return bool
 	 */
 	protected function doWait( $index, $open = false, $timeout = null ) {
-		$timeout = max( 1, $timeout ?: $this->waitTimeout );
+		$timeout = max( 1, intval( $timeout ?: $this->waitTimeout ) );
 
 		// Check if we already know that the DB has reached this point
 		$server = $this->getServerName( $index );
@@ -1139,7 +1140,7 @@ class LoadBalancer implements ILoadBalancer {
 				$context
 			);
 
-			// If all servers were busy, mLastError will contain something sensible
+			// If all servers were busy, "lastError" will contain something sensible
 			throw new DBConnectionError( null, $this->lastError );
 		}
 	}

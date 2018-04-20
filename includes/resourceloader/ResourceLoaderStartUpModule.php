@@ -88,7 +88,6 @@ class ResourceLoaderStartUpModule extends ResourceLoaderModule {
 			'wgUrlProtocols' => wfUrlProtocols(),
 			'wgArticlePath' => $conf->get( 'ArticlePath' ),
 			'wgScriptPath' => $conf->get( 'ScriptPath' ),
-			'wgScriptExtension' => '.php',
 			'wgScript' => wfScript(),
 			'wgSearchType' => $conf->get( 'SearchType' ),
 			'wgVariantArticlePath' => $conf->get( 'VariantArticlePath' ),
@@ -101,8 +100,8 @@ class ResourceLoaderStartUpModule extends ResourceLoaderModule {
 			'wgContentLanguage' => $wgContLang->getCode(),
 			'wgTranslateNumerals' => $conf->get( 'TranslateNumerals' ),
 			'wgVersion' => $conf->get( 'Version' ),
-			'wgEnableAPI' => $conf->get( 'EnableAPI' ),
-			'wgEnableWriteAPI' => $conf->get( 'EnableWriteAPI' ),
+			'wgEnableAPI' => true, // Deprecated since MW 1.32
+			'wgEnableWriteAPI' => true, // Deprecated since MW 1.32
 			'wgMainPageTitle' => $mainPage->getPrefixedText(),
 			'wgFormattedNamespaces' => $wgContLang->getFormattedNamespaces(),
 			'wgNamespaceIds' => $namespaceIds,
