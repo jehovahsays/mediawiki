@@ -31,7 +31,7 @@
 # List of Custom HTTP Security Headers. 
 header( 'Content-Type-Options: nosniff' );
 header( 'X-Content-Type-Options: nosniff' );
-include(realpath(getenv('DOCUMENT_ROOT')) . '/blackhole/index.php');
+//include(realpath(getenv('DOCUMENT_ROOT')) . '/blackhole/index.php');
 header( 'XSS-Protection: 1; mode=block' );
 header( 'X-XSS-Protection: 1; mode=block' );
 header( 'Frame-Options: Deny' );
@@ -41,16 +41,6 @@ header( 'Expires: no-cache' );
 header( 'Pragma: no-cache' );
 header( 'Referrer-Policy:  same-origin' );
 header_remove( 'X-Powered-By' );
-//header( 'Content-Security-Policy: default-src "self";');
-//header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload' );
-//header( 'google-site-verification: ' );
-//header( 'msvalidate.01: ' );
-//header( 'norton-safeweb-site-verification: ' );
-//header( 'wot-verification: ' );
-//header( 'author: ' );
-//header( 'description: ' );
-//header( 'keywords: ' );
-//header( 'Expect-CT:  enforce,max-age=30,report-uri=""' );
 
 # Valid web server entry point, enable includes.
 # Please don't move this line to includes/Defines.php. This line essentially
