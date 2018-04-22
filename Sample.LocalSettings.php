@@ -18,19 +18,21 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = "@jehovahsays";
-$wgMetaNamespace = "Project";
+$wgSitename = "jehovahsays.net";
+$wgMetaNamespace = "Developer_Testing";
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "/blackhole/wiki";
+$wgScriptPath = "";        // may already exist
+$wgArticlePath = "/$1";    // tells MediaWiki how IIS will be rewriting URLs
+$wgUsePathInfo = false;    // mine was false you may have to set yours to true
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServerName = 'jehovahsays.net';
-$wgServer = "http://127.0.0.1";
+$wgServer = "https://jehovahsays.net";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -43,8 +45,8 @@ $wgLogo = "$wgResourceBasePath/resources/assets/mediawiki.png";
 $wgEnableEmail = false;
 $wgEnableUserEmail = false; # UPO
 
-$wgEmergencyContact = "";
-$wgPasswordSender = "";
+$wgEmergencyContact = "authority@jehovahsays.net";
+$wgPasswordSender = "authority@jehovahsays.net";
 
 $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
@@ -58,7 +60,7 @@ $wgDBuser = "";
 $wgDBpassword = "";
 
 # MySQL specific settings
-$wgDBprefix = "";
+$wgDBprefix = "Development";
 
 # MySQL table options to use during installation or update
 $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
@@ -93,6 +95,7 @@ $wgShellLocale = "C.UTF-8";
 ## to make your wiki go slightly faster. The directory should not
 ## be publically accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
+#$wgFileCacheDirectory = "E:\log\cache";
 
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "en";
@@ -100,7 +103,7 @@ $wgLanguageCode = "en";
 $wgSecretKey = "";
 
 # Changing this will log out all existing sessions.
-$wgAuthenticationTokenVersion = "1";
+$wgAuthenticationTokenVersion = "";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
@@ -110,46 +113,48 @@ $wgUpgradeKey = "";
 ## appropriate copyright notice / icon. GNU Free Documentation
 ## License and Creative Commons licenses are supported so far.
 $wgRightsPage = ""; # Set to the title of a wiki page that describes your license/copyright
-$wgRightsUrl = "";
-$wgRightsText = "";
-$wgRightsIcon = "";
+$wgRightsUrl = "https://creativecommons.org/licenses/by-sa/4.0/";
+$wgRightsText = "Creative Commons Attribution-ShareAlike";
+$wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "C:\\Program Files\\Git\\usr\\bin\\diff3.exe";
 $wgDiff = "C:\\Program Files\\Git\\usr\\bin\\diff.exe";
 $wgCollapsibleVectorFeatures['collapsiblenav']['global'] = true;
-//$wgSecureLogin = false;
+$wgSecureLogin = true;
 $wgCookieHttpOnly = true;
-$wgCookieSecure = 'detect';
-//$wgHiddenPrefs[] = 'realname';
+$wgCookieSecure = true; // Add 'detect' if not true
+$wgHiddenPrefs[] = 'realname';
 $wgUrlProtocols = array(
    'bitcoin:'
 );
 //$wgRawHtml = false;
-//$wgUseRCPatrol= false;
+$wgUseRCPatrol= false;
+$wgUseGzip = true;
+$wgEnableSidebarCache = false;
 $wgShowIPinHeader = false;
 $wgPutIPinRC = false;
-$wgDisableAnonTalk = false;
-//$wgResourceLoader = false;
+$wgDisableAnonTalk = true;
+$wgResourceLoader = false;
 $wgBreakFrames = true;
 $wgApiFrameOptions = 'DENY';
 $wgEditPageFrameOptions = 'DENY';
 $wgMangleFlashPolicy = true;
 $wgValidateAllHtml  = true;
-//$wgDefaultUserOptions['skin'] = false;
-//$wgHiddenPrefs[] = 'skin';
-//$wgLoadScript = false;
-//$wgStylePath = false;
+$wgDefaultUserOptions['skin'] = false;
+$wgHiddenPrefs[] = 'skin';
+$wgLoadScript = false;
+$wgStylePath = false;
 //$wgDBWindowsAuthentication = false;
 $wgAmericanDates = true;
 $wgUseCopyrightUpload = true;
 //$wgWhitelistRead =  array ( "Main_Page", "Main_Page&printable=yes", "Project:Privacy_policy", "Project:General_disclaimer", "Project:About", "Special:Userlogin", "Special:UserLogin&printable=yes", "Special:CreateAccount", "Special:CreateAccount&printable=yes", "Special:RecentChanges", "Special:RecentChanges&printable=yes", "Special:Search", "Special:Search&printable=yes", "Special:PasswordReset", "Special:PasswordReset&printable=yes", "Special:SpecialPages", "Special:SpecialPages&printable=yes" );
-
+$wgAllowSiteCSSOnRestrictedPages = true;
 # for everyone
 $wgGroupPermissions['*']['read'] = true;
 $wgGroupPermissions['*']['createaccount'] = true;
 $wgGroupPermissions['*']['view'] = true;
-$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['edit'] = true;
 
 # for users
 $wgGroupPermissions['user']['read'] = true;
@@ -183,7 +188,6 @@ wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'Poem' );
 wfLoadExtension( 'Renameuser' );
 wfLoadExtension( 'SpamBlacklist' );
-wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'TitleBlacklist' );
 wfLoadExtension( 'WikiEditor' );
 $wgHiddenPrefs[] = 'usebetatoolbar';
@@ -203,11 +207,16 @@ p.none {border-style: none;}
 p.hidden {border-style: hidden;}
 p.mix {border-style: dotted dashed solid double;}
 </style>
+<form autocomplete="off">
+<fieldset disabled>
 ';
 
-# You can add <noscript> within $wgBottomSecurity = ''; to lockdown wiki
+# You can add <fieldset disabled> below within $wgBottomSecurity = ''; to disables all form on wiki and <noscript> displays headless pages
 $wgBottomSecurity = '
-<a rel="nofollow" style="display:none;" href="/blackhole/" title="Do NOT follow this link or you will be temporarily banned from the site! The blackhole.dat file can lift ban"><img src="/blackhole/__utm.gif" alt="" /></a>
+</fieldset>
+</form>
+<a rel=nofollow style="display:none;" href="/blackhole/" title="Do NOT follow this link or you will be temporarily banned from the site! The blackhole.dat file can lift ban"><img src="/blackhole/__utm.gif" height="1" width="1" alt=""/></a>
+<noscript>
 ';
 
 # End of automatically generated settings.
