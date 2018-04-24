@@ -99,7 +99,7 @@ class SkinFallbackTemplate extends BaseTemplate {
 		echo Html::warningBox( $this->buildHelpfulInformationMessage() );
 	?>
 		<form action="<?php $this->text( 'wgScript' ) ?>">
-			<input type="hidden" name="title" value="<?php $this->text( 'searchtitle' ) ?>" />
+			<input autocomplete="off" type="hidden" name="title" value="<?php $this->text( 'searchtitle' ) ?>" />
 			<h3><label for="searchInput"><?php $this->msg( 'search' ) ?></label></h3>
 			<?php echo $this->makeSearchInput( [ "id" => "searchInput" ] ) ?>
 			<?php echo $this->makeSearchButton( 'go' ) ?>
